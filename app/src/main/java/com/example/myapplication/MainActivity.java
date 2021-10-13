@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+<<<<<<< app/src/main/java/com/example/myapplication/MainActivity.java
         h.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -23,6 +24,12 @@ public class MainActivity extends AppCompatActivity {
             }
                       }, 5000);
 
+                    setTitle("Main Menu");
 
+
+=======
+
+        setTitle("Main Menu");
+>>>>>>> app/src/main/java/com/example/myapplication/MainActivity.java
     }
 }
