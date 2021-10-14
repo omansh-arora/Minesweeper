@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HelpActivity"
+    android:background="@drawable/warzonefade"
+    >
+
+
+    <TextView
+        android:id="@+id/help_txtAbTheAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="22dp"
+        android:background="#1E4E24"
+        android:text="@string/about_the_authors"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/help_txtGameplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="172dp"
+        android:background="#1E4E24"
+        android:text="@string/gameplay"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/help_txtHomeLink"
+        android:layout_width="415dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="8dp"
+        android:background="#2E7861"
+        android:text="@string/linktosite"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/help_txtAbTheAuthor"
+        app:layout_constraintTop_toBottomOf="@+id/help_txtAbTheAuthor" />
+
+    <TextView
+        android:id="@+id/help_txtCodeWrittenBy"
+        android:layout_width="426dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="40dp"
+        android:background="#2E7861"
+        android:text="@string/code_written_by_nomansh_arora_ngavin_nagra"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/help_txtAbTheAuthor"
+        app:layout_constraintTop_toBottomOf="@+id/help_txtAbTheAuthor" />
+
+    <TextView
+        android:id="@+id/help_txtRules"
+        android:layout_width="438dp"
+        android:layout_height="144dp"
+        android:layout_marginTop="8dp"
+        android:background="#2E7861"
+        android:text="@string/you_must_bring_our_troops_home_nscan_the_battlefield_for_mines_by_clicking_on_a_square_nthe_number_that_shows_up_tells_you_how_nmany_mines_are_in_that_square_s_row_and_column_nyour_goal_is_to_reveal_all_the_mines_with_the_least_number_of_scans_ngood_luck_solider"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/help_txtGameplay"
+        app:layout_constraintTop_toBottomOf="@+id/help_txtGameplay" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
