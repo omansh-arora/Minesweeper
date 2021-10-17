@@ -2,6 +2,8 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
@@ -10,12 +12,17 @@ import android.widget.Toast;
 
 public class OptionsActivity extends AppCompatActivity {
 
+    private static final String MINE_PREF_NAME = "Num mines";
+    private static final String BOARD_PREF_NAME = "Board size";
+    private static final String PREFS_NAME = "AppPrefs";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
 
         createRadioButtons();
+
     }
 
     private void createRadioButtons() {
@@ -38,11 +45,18 @@ public class OptionsActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     Toast.makeText(OptionsActivity.this, "Size " + boardSize,
                             Toast.LENGTH_SHORT).show();
+                    saveBoard(boardSize);
                 }
             });
 
             // Add to radio group:
             board_group.addView(board_button);
+
+            // Set default button:
+            if (boardSize.equals(getBoard(this))) {
+                board_button.setChecked(true);
+            }
+
         }
 
         for(int j = 0; j < number_of_mines.length; j++) {
@@ -56,12 +70,45 @@ public class OptionsActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     Toast.makeText(OptionsActivity.this, numOfMines + " mines",
                             Toast.LENGTH_SHORT).show();
+                    saveMines(numOfMines);
                 }
             });
 
+            // Add to radio group:
             mines_group.addView(mine_button);
 
-
+            // Select default button:
+            if (numOfMines == getMines(this)) {
+                mine_button.setChecked(true);
+            }
         }
+    }
+
+    private void saveMines(int numOfMines) {
+        SharedPreferences prefs = this.getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(MINE_PREF_NAME, numOfMines);
+        editor.apply();
+    }
+
+    static public int getMines(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+
+        int defaultValue = context.getResources().getInteger(R.integer.default_mines);
+        return prefs.getInt(MINE_PREF_NAME, defaultValue);
+    }
+
+    private void saveBoard(String boardSize) {
+        SharedPreferences prefs = this.getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(BOARD_PREF_NAME, boardSize);
+        editor.apply();
+    }
+
+    static public String getBoard(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+
+        String defaultValue = context.getResources().getString(R.string.default_boardSize);
+        return prefs.getString(BOARD_PREF_NAME, defaultValue);
     }
 }

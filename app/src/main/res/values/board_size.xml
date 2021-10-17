@@ -5,4 +5,7 @@
         <item>5x10</item>
         <item>6x15</item>
     </string-array>
+
+    <string name="default_boardSize">4x6</string>
+
 </resources>
