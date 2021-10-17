@@ -28,6 +28,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button playGame = (Button) findViewById(R.id.btn_mm_playGame);
+        playGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent newGame = new Intent(MainActivity.this, GameActivity.class);
+                startActivity(newGame);
+            }
+        });
 
     }
 

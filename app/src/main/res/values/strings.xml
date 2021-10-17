@@ -11,7 +11,7 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="linktosite">
-        <a href ="https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home">Link to CMPT276 site</a>
+        <a href="https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home">Link to CMPT276 site</a>
     </string>
     <string name="gameplay">Gameplay:</string>
     <string name="code_written_by_nomansh_arora_ngavin_nagra">Code written by:\nOmansh Arora\nGavin Nagra</string>
