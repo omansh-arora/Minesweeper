@@ -28,6 +28,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button options = (Button) findViewById(R.id.btn_mm_options);
+        options.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent add = new Intent(MainActivity.this, OptionsActivity.class);
+                startActivity(add);
+            }
+        });
+
 
     }
 

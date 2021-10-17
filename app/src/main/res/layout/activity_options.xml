@@ -4,19 +4,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OptionsActivity">
+    android:layout_centerInParent="true"
+    tools:context=".OptionsActivity"
+    android:background="@color/midgreen_200"
+    >
+
+    <TextView
+        android:id="@+id/options"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/options"
+        android:textColor="#FFFFFF"
+        android:textSize="50sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/boardsize"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="280dp"
+        android:layout_marginTop="80dp"
+        android:text="@string/boardSize"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <RadioGroup
         android:id="@+id/radio_group_board_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="58dp"
-        tools:layout_editor_absoluteY="60dp" >
+        android:layout_marginStart="-75dp"
+        android:layout_marginTop="30dp"
+        android:textColor="#FFFFFF"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@+id/boardsize"
+        app:layout_constraintTop_toTopOf="@+id/boardsize"
+        />
 
-        <RadioButton
-            android:id="@+id/radioButton"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="RadioButton" />
-    </RadioGroup>
+    <TextView
+        android:id="@+id/num_of_mines"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="205dp"
+        android:text="Number of Mines"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <RadioGroup
+        android:id="@+id/radio_group_mines"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-116dp"
+        android:layout_marginTop="30dp"
+        android:textColor="#FFFFFF"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@+id/num_of_mines"
+        app:layout_constraintTop_toTopOf="@+id/num_of_mines"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
