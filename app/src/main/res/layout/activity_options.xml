@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    tools:context=".OptionsActivity"
+    android:background="@drawable/mw2"
+    >
+
+    <TextView
+        android:id="@+id/options"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/options"
+        android:textColor="#000000"
+        android:textSize="50sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/boardsize"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="280dp"
+        android:layout_marginTop="80dp"
+        android:text="@string/boardSize"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <RadioGroup
+        android:id="@+id/radio_group_board_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-85dp"
+        android:layout_marginTop="30dp"
+        android:textColor="#000000"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@+id/boardsize"
+        app:layout_constraintTop_toTopOf="@+id/boardsize"
+        />
+
+    <TextView
+        android:id="@+id/num_of_mines"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="205dp"
+        android:text="Number of Mines"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <RadioGroup
+        android:id="@+id/radio_group_mines"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-126dp"
+        android:layout_marginTop="30dp"
+        android:textColor="#000000"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@+id/num_of_mines"
+        app:layout_constraintTop_toTopOf="@+id/num_of_mines"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

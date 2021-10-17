@@ -17,4 +17,9 @@
     <string name="code_written_by_nomansh_arora_ngavin_nagra">Code written by:\nOmansh Arora\nGavin Nagra</string>
     <string name="you_must_bring_our_troops_home_nscan_the_battlefield_for_mines_by_clicking_on_a_square_nthe_number_that_shows_up_tells_you_how_nmany_mines_are_in_that_square_s_row_and_column_nyour_goal_is_to_reveal_all_the_mines_with_the_least_number_of_scans_ngood_luck_solider">You must bring our troops home!\nScan the battlefield for mines by clicking on a square.\nThe number that shows up tells you how\nmany mines are in that square\'s row and column.\nYour goal is to reveal all the mines with the least number of scans.\nGood luck solider!</string>
     <string name="about_the_authors">About the authors:</string>
+    <string name="title_activity_options">OptionsActivity</string>
+    <string name="board_size">"%1$d"</string>
+    <string name="boardSize">Board Size</string>
+    <string name="num_of_mines">"%1$d"</string>
+    <string name="options">Options</string>
 </resources>
