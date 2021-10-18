@@ -7,16 +7,21 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +55,21 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(newGame);
             }
         });
+
+    }
+
+    protected void onStart() {
+
+        refreshGP();
+        super.onStart();
+
+    }
+
+    private void refreshGP() {
+
+        TextView g_played = (TextView) findViewById(R.id.txt_mm_gamesPlayed);
+        String gp = "Games played: " + Integer.toString(GameActivity.getGames(this));
+        g_played.setText(gp);
 
     }
 

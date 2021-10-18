@@ -22,4 +22,6 @@
     <string name="boardSize">Board Size</string>
     <string name="num_of_mines">"%1$d"</string>
     <string name="options">Options</string>
+    <string name="welcome">Welcome</string>
+    <string name="skip">Skip</string>
 </resources>

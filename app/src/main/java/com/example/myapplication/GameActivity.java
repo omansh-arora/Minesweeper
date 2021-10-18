@@ -10,6 +10,8 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -37,7 +39,11 @@ public class GameActivity extends AppCompatActivity {
     public int MINES_LEFT;
     public int SCANS_USED;
 
+    private static final String GAME_PREF_NAME = "Games played";
+    private static final String SCORE_PREF_NAME = "High score";
+    private static final String PREFS_NAME = "OpFeatSets";
 
+    int gamesPlayed;
 
 
     @Override
@@ -46,10 +52,14 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        gamesPlayed  = getGames(this);
+
         MINES = OptionsActivity.getMines(this);
         if(OptionsActivity.getBoard(this).equals("4x6")) BOARD = 0;
         if(OptionsActivity.getBoard(this).equals("5x10")) BOARD = 1;
         if(OptionsActivity.getBoard(this).equals("6x15")) BOARD = 2;
+
+        String score = "High score: " + Integer.toString(getHighScore(this));
 
         SCANS_USED = 0;
         MINES_LEFT = MINES;
@@ -63,6 +73,36 @@ public class GameActivity extends AppCompatActivity {
         String minesLeftT = "Mines left: " + MINES_LEFT + "";
         minesText.setText(minesLeftT);
         populateButtons();
+    }
+
+    private void saveGames(int gamesPlayed) {
+        SharedPreferences prefs = this.getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(GAME_PREF_NAME, gamesPlayed);
+        editor.apply();
+    }
+
+    static public int getGames(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+
+        int defaultValue = context.getResources().getInteger(R.integer.default_games);
+        return prefs.getInt(GAME_PREF_NAME, defaultValue);
+    }
+
+    private void saveHighScore(int score) {
+        SharedPreferences prefs = this.getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        editor.putInt(SCORE_PREF_NAME, score);
+        editor.apply();
+    }
+
+
+    static public Integer getHighScore(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+
+        Integer defaultValue = context.getResources().getInteger(R.integer.default_score);
+        return prefs.getInt(SCORE_PREF_NAME, defaultValue);
     }
 
     private void populateButtons() {
@@ -167,6 +207,9 @@ public class GameActivity extends AppCompatActivity {
             MINES_LEFT--;
             if (MINES_LEFT==0){
                 Toast.makeText(this,"Game won! Your score was "+SCANS_USED,Toast.LENGTH_LONG).show();
+                if(SCANS_USED < getHighScore(this)) saveHighScore(SCANS_USED);
+                gamesPlayed++;
+                saveGames(gamesPlayed);
                 finish();
             }
             minesText.setText("Mines left: " + MINES_LEFT);
@@ -203,8 +246,8 @@ public class GameActivity extends AppCompatActivity {
     private void randomizeMines(int [][] arr){
 
         //Initialize array
-        for (int i = 0; i < arr.length; i++) {
-            Arrays.fill(arr[i], 0);
+        for (int[] ints : arr) {
+            Arrays.fill(ints, 0);
         }
 
         //Add mines

@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -31,6 +32,14 @@ public class OptionsActivity extends AppCompatActivity {
         if(getBoard(this).equals("4x6")) BOARDSIZE = 0;
         if(getBoard(this).equals("5x10")) BOARDSIZE = 1;
         if(getBoard(this).equals("6x15")) BOARDSIZE = 2;
+
+        Button resetGames = (Button) findViewById(R.id.options_resGames);
+        resetGames.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         createRadioButtons();
 
