@@ -22,6 +22,10 @@ public class OptionsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
+        MINES = getMines(this);
+        if(getBoard(this).equals("4x6")) BOARDSIZE = 0;
+        if(getBoard(this).equals("5x10")) BOARDSIZE = 1;
+        if(getBoard(this).equals("6x15")) BOARDSIZE = 2;
 
         createRadioButtons();
 
@@ -109,9 +113,7 @@ public class OptionsActivity extends AppCompatActivity {
     private void saveBoard(String boardSize) {
         SharedPreferences prefs = this.getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        if(boardSize == "4x6") BOARDSIZE = 0;
-        if(boardSize == "5x10") BOARDSIZE = 1;
-        if(boardSize == "6x15") BOARDSIZE = 2;
+
         editor.putString(BOARD_PREF_NAME, boardSize);
         editor.apply();
     }
