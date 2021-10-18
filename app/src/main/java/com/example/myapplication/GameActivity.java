@@ -102,8 +102,6 @@ public class GameActivity extends AppCompatActivity {
                 int finalRow = row;
                 int finalCol = col;
 
-                button.setBackgroundResource(R.drawable.sand);
-
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

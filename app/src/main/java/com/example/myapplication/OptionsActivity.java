@@ -42,13 +42,14 @@ public class OptionsActivity extends AppCompatActivity {
             board_button.setText(boardSize);
 
             // Set on-click callbacks
-            BOARDSIZE = i;
+            int finalI = i;
             board_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Toast.makeText(OptionsActivity.this, "Size " + boardSize,
                             Toast.LENGTH_SHORT).show();
                     saveBoard(boardSize);
+                    BOARDSIZE = finalI;
                 }
             });
 
@@ -68,8 +69,6 @@ public class OptionsActivity extends AppCompatActivity {
             RadioButton mine_button = new RadioButton(this);
             mine_button.setText(getString(R.string.num_of_mines, numOfMines));
 
-            MINES = numOfMines;
-
 
             mine_button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -77,6 +76,8 @@ public class OptionsActivity extends AppCompatActivity {
                     Toast.makeText(OptionsActivity.this, numOfMines + " mines",
                             Toast.LENGTH_SHORT).show();
                     saveMines(numOfMines);
+                    MINES = numOfMines;
+
                 }
             });
 
@@ -92,6 +93,7 @@ public class OptionsActivity extends AppCompatActivity {
 
     private void saveMines(int numOfMines) {
         SharedPreferences prefs = this.getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        MINES = numOfMines;
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt(MINE_PREF_NAME, numOfMines);
         editor.apply();
@@ -107,6 +109,9 @@ public class OptionsActivity extends AppCompatActivity {
     private void saveBoard(String boardSize) {
         SharedPreferences prefs = this.getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
+        if(boardSize == "4x6") BOARDSIZE = 0;
+        if(boardSize == "5x10") BOARDSIZE = 1;
+        if(boardSize == "6x15") BOARDSIZE = 2;
         editor.putString(BOARD_PREF_NAME, boardSize);
         editor.apply();
     }
