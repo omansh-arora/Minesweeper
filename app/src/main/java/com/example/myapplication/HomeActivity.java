@@ -32,7 +32,7 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(i);
                 finish();
             }
-        }, 3000);
+        }, 5000);
     }
 
     public void openMainActivity() {
