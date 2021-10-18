@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-<<<<<<< app/src/main/java/com/example/myapplication/MainActivity.java
         Button options = (Button) findViewById(R.id.btn_mm_options);
         options.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(newGame);
             }
         });
->>>>>>> app/src/main/java/com/example/myapplication/MainActivity.java
 
     }
 

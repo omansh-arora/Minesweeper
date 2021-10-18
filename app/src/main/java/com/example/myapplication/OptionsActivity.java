@@ -15,6 +15,8 @@ public class OptionsActivity extends AppCompatActivity {
     private static final String MINE_PREF_NAME = "Num mines";
     private static final String BOARD_PREF_NAME = "Board size";
     private static final String PREFS_NAME = "AppPrefs";
+    public static int MINES;
+    public static int BOARDSIZE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class OptionsActivity extends AppCompatActivity {
             board_button.setText(boardSize);
 
             // Set on-click callbacks
+            BOARDSIZE = i;
             board_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -64,6 +67,9 @@ public class OptionsActivity extends AppCompatActivity {
 
             RadioButton mine_button = new RadioButton(this);
             mine_button.setText(getString(R.string.num_of_mines, numOfMines));
+
+            MINES = numOfMines;
+
 
             mine_button.setOnClickListener(new View.OnClickListener() {
                 @Override

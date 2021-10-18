@@ -10,13 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-<<<<<<< app/src/main/AndroidManifest.xml
             android:name=".OptionsActivity"
             android:exported="true" />
         <activity
             android:name=".GameActivity"
             android:exported="false" />
->>>>>>> app/src/main/AndroidManifest.xml
         <activity
             android:name=".HelpActivity"
             android:exported="false" />
