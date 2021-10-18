@@ -1,3 +1,10 @@
+/*
+
+Activity that plays the game
+
+ */
+
+
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +26,7 @@ import java.util.Arrays;
 
 public class GameActivity extends AppCompatActivity {
 
-    int Board = OptionsActivity.BOARDSIZE;
+    int BOARD = OptionsActivity.BOARDSIZE;
     private static int MINES = OptionsActivity.MINES;
     private int rows_f;
     private int cols_f;
@@ -38,10 +45,14 @@ public class GameActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        MINES = OptionsActivity.MINES;
-        Board = OptionsActivity.BOARDSIZE;
+
+        MINES = OptionsActivity.getMines(this);
+        if(OptionsActivity.getBoard(this).equals("4x6")) BOARD = 0;
+        if(OptionsActivity.getBoard(this).equals("5x10")) BOARD = 1;
+        if(OptionsActivity.getBoard(this).equals("6x15")) BOARD = 2;
+
         SCANS_USED = 0;
-        MINES_LEFT = OptionsActivity.MINES;
+        MINES_LEFT = MINES;
 
         TextView scansText = (TextView) findViewById(R.id.scans_used);
         TextView minesText = (TextView) findViewById(R.id.mines_left);
@@ -60,7 +71,7 @@ public class GameActivity extends AppCompatActivity {
         int row_num =2;
         int col_num=4;
 
-        if(Board == 0){
+        if(BOARD == 0){
 
             row_num = 4;
             col_num = 6;
@@ -72,7 +83,7 @@ public class GameActivity extends AppCompatActivity {
 
             buttonArr = butArr;
         }
-        if(Board == 1){
+        if(BOARD == 1){
 
             row_num = 5;
             col_num = 10;
@@ -85,7 +96,7 @@ public class GameActivity extends AppCompatActivity {
             buttonArr = butArr;
 
         }
-        if(Board == 2){
+        if(BOARD == 2){
 
             row_num = 6;
             col_num = 15;
