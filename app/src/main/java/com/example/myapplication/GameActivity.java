@@ -12,24 +12,45 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Arrays;
 
 public class GameActivity extends AppCompatActivity {
 
     int Board = OptionsActivity.BOARDSIZE;
-    private static final int MINES = OptionsActivity.MINES;
+    private static int MINES = OptionsActivity.MINES;
     private int rows_f;
     private int cols_f;
 
     int[][] buttonArr;
     Button[][] buttons;
 
+    public int MINES_LEFT;
+    public int SCANS_USED;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        setTitle("Play game");
+        MINES = OptionsActivity.MINES;
+        Board = OptionsActivity.BOARDSIZE;
+        SCANS_USED = 0;
+        MINES_LEFT = OptionsActivity.MINES;
+
+        TextView scansText = (TextView) findViewById(R.id.scans_used);
+        TextView minesText = (TextView) findViewById(R.id.mines_left);
+
+        String scans = "Scans used: " + SCANS_USED + "";
+        scansText.setText(scans);
+
+        String minesLeftT = "Mines left: " + MINES_LEFT + "";
+        minesText.setText(minesLeftT);
         populateButtons();
     }
 
@@ -110,6 +131,7 @@ public class GameActivity extends AppCompatActivity {
                 });
                 tRow.addView(button);
                 buttons[row][col] = button;
+                button.setPadding(0,0,0,0);
 
             }
         }
@@ -118,20 +140,34 @@ public class GameActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void gridButtonClicked(int row, int col, Button button) {
+        TextView scansText = (TextView) findViewById(R.id.scans_used);
+        TextView minesText = (TextView) findViewById(R.id.mines_left);
 
         lockButtonSizes();
 
-        if (buttonArr[row][col] == 1 && button.getText()!="MINE FOUND!"){
-
-            button.setText("MINE FOUND!");
+        if (buttonArr[row][col] == 1 && button.getText()!="MINE"){
+            button.setText("MINE");
             int newWidth = button.getWidth();
             int newHeight = button.getHeight();
             Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.landmine);
             Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
             Resources resource = getResources();
             button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+            MINES_LEFT--;
+            if (MINES_LEFT==0){
+                Toast.makeText(this,"Game won! Your score was "+SCANS_USED,Toast.LENGTH_LONG).show();
+                finish();
+            }
+            minesText.setText("Mines left: " + MINES_LEFT);
             return;
-        }
+        } if(button.getText()=="MINE"){
+            button.setText(Integer.toString((scanForMines(buttonArr,row,col)-2)));
+            SCANS_USED++;
+            scansText.setText("Scans used: " + SCANS_USED);
+            return;}
+        lockButtonSizes();
+        SCANS_USED++;
+        scansText.setText("Scans used: " + SCANS_USED);
         button.setText(Integer.toString(scanForMines(buttonArr,row,col)));
 
     }
@@ -165,8 +201,8 @@ public class GameActivity extends AppCompatActivity {
         int cols = arr[0].length - 1;
         for (int i = 0; i < MINES; i++){
 
-            int ranRows = (int)((Math.random() * (rows)) + 0);
-            int ranCols = (int)((Math.random() * (cols)) + 0);
+            int ranRows = (int)((Math.random() * (rows) - 0) + 0);
+            int ranCols = (int)((Math.random() * (cols) - 0) + 0);
 
             while(arr[ranRows][ranCols] != 0){
 

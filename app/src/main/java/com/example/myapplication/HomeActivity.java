@@ -22,14 +22,14 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 openMainActivity();
+                finish();
             }
         });
 
         h.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(HomeActivity.this, MainActivity.class);
-                startActivity(i);
+                openMainActivity();
                 finish();
             }
         }, 5000);

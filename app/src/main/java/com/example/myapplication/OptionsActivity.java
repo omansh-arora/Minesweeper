@@ -97,7 +97,6 @@ public class OptionsActivity extends AppCompatActivity {
 
     private void saveMines(int numOfMines) {
         SharedPreferences prefs = this.getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        MINES = numOfMines;
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt(MINE_PREF_NAME, numOfMines);
         editor.apply();
