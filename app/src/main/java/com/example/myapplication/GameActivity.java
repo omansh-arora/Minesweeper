@@ -18,6 +18,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -46,7 +48,6 @@ public class GameActivity extends AppCompatActivity {
     GameLogic gl;
 
     int gamesPlayed;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

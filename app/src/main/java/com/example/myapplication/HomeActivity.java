@@ -19,6 +19,7 @@ import android.widget.Button;
 public class HomeActivity extends AppCompatActivity {
     Handler h = new Handler();
     private static int time = 4000;
+    private int activityCheck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +28,13 @@ public class HomeActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent in = new Intent(HomeActivity.this, MainActivity.class);
-                startActivity(in);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                finish();
+
+                if (activityCheck != 1) {
+                    Intent in = new Intent(HomeActivity.this, MainActivity.class);
+                    startActivity(in);
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    finish();
+                }
             }
         }, time);
 
@@ -39,22 +43,15 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 openMainActivity();
-                finish();
             }
         });
-
-        h.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                openMainActivity();
-                finish();
-            }
-        }, 5000);
     }
 
     public void openMainActivity() {
+        activityCheck = 1;
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 
 }
