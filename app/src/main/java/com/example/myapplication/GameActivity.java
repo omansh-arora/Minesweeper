@@ -281,18 +281,4 @@ public class GameActivity extends AppCompatActivity {
         return total;
 
     }
-
-    private void scanAnimation(int column, int row) {
-
-        // TODO: Animate column of selection
-        for (int i = 0; i < column; i++) {
-
-        }
-
-        // TODO: Animate row of selection
-        for (int j = 0; j < row; j++) {
-
-        }
-
-    }
 }
