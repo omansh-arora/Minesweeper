@@ -1,8 +1,3 @@
-/*
-
-Options screen
-
- */
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +11,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.myapplication.model.GameInfo;
+
 public class OptionsActivity extends AppCompatActivity {
 
     private static final String MINE_PREF_NAME = "Num mines";
@@ -24,20 +21,28 @@ public class OptionsActivity extends AppCompatActivity {
     public static int MINES;
     public static int BOARDSIZE;
 
+    GameInfo gameInfo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
-        MINES = getMines(this);
-        if(getBoard(this).equals("4x6")) BOARDSIZE = 0;
-        if(getBoard(this).equals("5x10")) BOARDSIZE = 1;
-        if(getBoard(this).equals("6x15")) BOARDSIZE = 2;
 
-        Button resetGames = (Button) findViewById(R.id.options_resGames);
-        resetGames.setOnClickListener(new View.OnClickListener() {
+        gameInfo = GameInfo.getInstance();
+
+        Button resetG = (Button) findViewById(R.id.options_resGames);
+        resetG.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                gameInfo.setGamesplayed(0);
+            }
+        });
 
+        Button resetHS = (Button) findViewById(R.id.options_resGames2);
+        resetHS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gameInfo.setHighscore(100);
             }
         });
 

@@ -24,4 +24,7 @@
     <string name="options">Options</string>
     <string name="welcome">Welcome</string>
     <string name="skip">Skip</string>
+    <string name="play_game">Play Game</string>
+    <string name="options2">options</string>
+    <string name="help">help</string>
 </resources>

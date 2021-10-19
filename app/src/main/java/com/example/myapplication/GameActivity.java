@@ -24,12 +24,15 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.model.GameInfo;
+import com.example.myapplication.model.GameLogic;
+
 import java.util.Arrays;
 
 public class GameActivity extends AppCompatActivity {
 
-    int BOARD = OptionsActivity.BOARDSIZE;
-    private static int MINES = OptionsActivity.MINES;
+    int BOARD;
+    private static int MINES;
     private int rows_f;
     private int cols_f;
 
@@ -39,9 +42,8 @@ public class GameActivity extends AppCompatActivity {
     public int MINES_LEFT;
     public int SCANS_USED;
 
-    private static final String GAME_PREF_NAME = "Games played";
-    private static final String SCORE_PREF_NAME = "High score";
-    private static final String PREFS_NAME = "OpFeatSets";
+    GameInfo gameInfo;
+    GameLogic gl;
 
     int gamesPlayed;
 
@@ -52,14 +54,22 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        gamesPlayed  = getGames(this);
+        gameInfo = GameInfo.getInstance();
+        gamesPlayed  = gameInfo.getGamesplayed();
 
-        MINES = OptionsActivity.getMines(this);
-        if(OptionsActivity.getBoard(this).equals("4x6")) BOARD = 0;
-        if(OptionsActivity.getBoard(this).equals("5x10")) BOARD = 1;
-        if(OptionsActivity.getBoard(this).equals("6x15")) BOARD = 2;
+        gl = GameLogic.getInstance();
+        MINES = gl.getMines();
+        BOARD = gl.getBoardsize();
 
-        String score = "High score: " + Integer.toString(getHighScore(this));
+
+        String score = "High score: " + Integer.toString(gameInfo.getHighscore());
+        TextView hScore = (TextView) findViewById(R.id.txt_highScore);
+        if (gameInfo.getHighscore()==100){
+
+            hScore.setText("No high score set");
+        }
+        else hScore.setText(score);
+
 
         SCANS_USED = 0;
         MINES_LEFT = MINES;
@@ -75,35 +85,20 @@ public class GameActivity extends AppCompatActivity {
         populateButtons();
     }
 
-    private void saveGames(int gamesPlayed) {
-        SharedPreferences prefs = this.getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt(GAME_PREF_NAME, gamesPlayed);
-        editor.apply();
+    protected void onStart() {
+
+        gameInfo = GameInfo.getInstance();
+        gamesPlayed  = gameInfo.getGamesplayed();
+
+        gl = GameLogic.getInstance();
+        MINES = gl.getMines();
+        BOARD = gl.getBoardsize();
+
+
+        String score = "High score: " + Integer.toString(gameInfo.getHighscore());
+        super.onStart();
     }
 
-    static public int getGames(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-
-        int defaultValue = context.getResources().getInteger(R.integer.default_games);
-        return prefs.getInt(GAME_PREF_NAME, defaultValue);
-    }
-
-    private void saveHighScore(int score) {
-        SharedPreferences prefs = this.getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-
-        editor.putInt(SCORE_PREF_NAME, score);
-        editor.apply();
-    }
-
-
-    static public Integer getHighScore(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-
-        Integer defaultValue = context.getResources().getInteger(R.integer.default_score);
-        return prefs.getInt(SCORE_PREF_NAME, defaultValue);
-    }
 
     private void populateButtons() {
 
@@ -207,9 +202,9 @@ public class GameActivity extends AppCompatActivity {
             MINES_LEFT--;
             if (MINES_LEFT==0){
                 Toast.makeText(this,"Game won! Your score was "+SCANS_USED,Toast.LENGTH_LONG).show();
-                if(SCANS_USED < getHighScore(this)) saveHighScore(SCANS_USED);
+                if(SCANS_USED < gameInfo.getHighscore()) gameInfo.setHighscore(SCANS_USED);
                 gamesPlayed++;
-                saveGames(gamesPlayed);
+                gameInfo.setGamesplayed(gamesPlayed);
                 finish();
             }
             minesText.setText("Mines left: " + MINES_LEFT);
