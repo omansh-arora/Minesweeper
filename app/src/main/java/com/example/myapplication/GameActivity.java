@@ -10,16 +10,13 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -48,6 +45,9 @@ public class GameActivity extends AppCompatActivity {
     GameLogic gl;
 
     int gamesPlayed;
+
+    MediaPlayer explode;
+    MediaPlayer scan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +81,14 @@ public class GameActivity extends AppCompatActivity {
         String scans = "Scans used: " + SCANS_USED + "";
         scansText.setText(scans);
 
+        explode = MediaPlayer.create(this,R.raw.sample);
+        scan = MediaPlayer.create(this,R.raw.scan);
+
         String minesLeftT = "Mines left: " + MINES_LEFT + "";
         minesText.setText(minesLeftT);
         populateButtons();
+
+
     }
 
     protected void onStart() {
@@ -94,6 +99,7 @@ public class GameActivity extends AppCompatActivity {
         gl = GameLogic.getInstance();
         MINES = gl.getMines();
         BOARD = gl.getBoardsize();
+
 
 
         String score = "High score: " + Integer.toString(gameInfo.getHighscore());
@@ -187,12 +193,15 @@ public class GameActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void gridButtonClicked(int row, int col, Button button) {
+        explode = MediaPlayer.create(this,R.raw.sample);
+        scan = MediaPlayer.create(this,R.raw.scan);
         TextView scansText = (TextView) findViewById(R.id.scans_used);
         TextView minesText = (TextView) findViewById(R.id.mines_left);
 
         lockButtonSizes();
 
         if (buttonArr[row][col] == 1 && button.getText()!="MINE"){
+            explode.start();
             button.setText("MINE");
             int newWidth = button.getWidth();
             int newHeight = button.getHeight();
@@ -211,11 +220,13 @@ public class GameActivity extends AppCompatActivity {
             minesText.setText("Mines left: " + MINES_LEFT);
             return;
         } if(button.getText()=="MINE"){
+            scan.start();
             button.setText(Integer.toString((scanForMines(buttonArr,row,col)-2)));
             SCANS_USED++;
             scansText.setText("Scans used: " + SCANS_USED);
             return;}
         lockButtonSizes();
+        scan.start();
         SCANS_USED++;
         scansText.setText("Scans used: " + SCANS_USED);
         button.setText(Integer.toString(scanForMines(buttonArr,row,col)));
